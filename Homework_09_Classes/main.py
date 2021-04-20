@@ -1,4 +1,4 @@
-#lab opet
+#lab opet bla
 class Vehicle:
 
     def __init__(self, make, model, year, weight):
@@ -114,6 +114,7 @@ c3.Stop()
 c3.Repair()
 c3.Drive(30)
 c3.Stop()
+print(c3)
 
 p1 = Planes("boeing", "747", 1995, 183500)
 
