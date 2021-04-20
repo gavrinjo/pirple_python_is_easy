@@ -1,4 +1,4 @@
-#lab
+#lab opet
 class Vehicle:
 
     def __init__(self, make, model, year, weight):
