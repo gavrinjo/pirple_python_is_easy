@@ -1,4 +1,4 @@
-#bla
+#lab
 class Vehicle:
 
     def __init__(self, make, model, year, weight):
