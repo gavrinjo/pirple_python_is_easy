@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 import shutil as sh
 import argparse
 
@@ -13,8 +13,8 @@ parser.add_argument("t", metavar="[Target location]", type=str, help="Destinatio
 args = parser.parse_args()
 
 filename = args.f
-source = Path(args.s).resolve()
-target = Path(args.t).resolve()
+source = args.s
+target = args.t
 
 
 def copy(src, tar, file):
@@ -22,9 +22,9 @@ def copy(src, tar, file):
     if file is None:
         file = "*.*"
 
-    s = Path.joinpath(src, file)
-    t = Path.joinpath(tar, file)
-    sh.copy2(str(s), str(t))
+    s = os.path.join(src, file)
+    t = tar
+    sh.copy2(s, t)
 
 
 if __name__ == '__main__':
