@@ -18,9 +18,8 @@ target = args.t
 
 
 def copy(src, tar, file):
-
     if file is None:
-        file = "*.*"
+        file = "*.*"  # ! This is not good, needs to be made in for loop
 
     s = os.path.join(src, file)
     t = tar
@@ -32,4 +31,3 @@ if __name__ == '__main__':
     print(filename)
     print(source)
     print(target)
-
