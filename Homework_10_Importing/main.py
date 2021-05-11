@@ -3,6 +3,14 @@ import shutil as sh
 import argparse
 from pathlib import Path
 
+"""
+Simple copy files script.
+It uses "shutil copy2" to copy files including meta data.
+Also uses "argparse" for command line arguments, since it is by design to compile script and use it as cmd tool.
+And "pathlib" to make the path absolute, resolving all symlinks on the way. 
+"""
+
+
 parser = argparse.ArgumentParser(prog="Copy", description="Just a small showcase using 'argparse', 'pathlib' and 'shutil' modules for copying files")
 
 # NOTE - Add the arguments
