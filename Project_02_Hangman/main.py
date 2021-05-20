@@ -1,5 +1,7 @@
 import string
 import os
+from pynput import keyboard
+
 
 # NOTE - new project Hangman game
 
@@ -59,13 +61,17 @@ def draw_hangman(tl):
     print("┴".ljust(7, "─"))
 
 
-"""for i in range(len(active_chars)):
+def abc():
+    pass
+
+
+for i in range(len(active_chars)):
     if i <= 11:
         print(active_chars[i], end=" ")
     elif i == 12:
         print(active_chars[i])
     else:
-        print(active_chars[i], end=" ")"""
+        print(active_chars[i], end=" ")
 
 
 """while game:
