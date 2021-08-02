@@ -13,12 +13,6 @@ from pynput import keyboard
 # 5│    ┌╨┐
 # 6│    ┘ └
 # 7┴──────
-# ┴┌┐┘└
-
-active_chars = list(string.ascii_uppercase)
-inactive_chars = list()
-attempts = 0  # NOTE - tries left
-game = False
 
 
 def header():
@@ -61,26 +55,34 @@ def draw_hangman(tl):
     print("┴".ljust(7, "─"))
 
 
-def abc():
-    pass
+def char_list(main, used, rest):
+    if rest is not None:
+        rest = []
+    for char in main:
+        if char in used:
+            char_replace = char.replace(char, "_")
+            rest.append(char_replace)
+        else:
+            rest.append(char)
+    return rest
 
 
-for i in range(len(active_chars)):
-    if i <= 11:
-        print(active_chars[i], end=" ")
-    elif i == 12:
-        print(active_chars[i])
-    else:
-        print(active_chars[i], end=" ")
+# os.system("cls" if os.name == "nt" else "clean")
+
+main_alphabet = list(string.ascii_uppercase)
+used_alphabet = []
+rest_alphabet = []
+attempts = 6  # NOTE - tries left
+
+secret_word = input("unesi: ")
 
 
-"""while game:
-    pass"""
-os.system("cls" if os.name == "nt" else "clean")
-header()
-secret_word = input()
-
-os.system("cls" if os.name == "nt" else "clean")
-header()
-draw_hangman(attempts)
-
+while attempts > 0:
+    header()
+    for char in char_list(main_alphabet, used_alphabet, rest_alphabet):
+        print(char, end=" ")
+    print()
+    draw_hangman(attempts)
+    letter = input("unesi slovo: ")
+    used_alphabet.append(letter.upper())
+    attempts -= 1
