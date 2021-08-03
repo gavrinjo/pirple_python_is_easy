@@ -1,18 +1,6 @@
 import string
 import os
-from pynput import keyboard
-
-
-# NOTE - new project Hangman game
-
-#  123456789
-# 1┌─────┐
-# 2│     │
-# 3│     @
-# 4│   ┌─╫─┐
-# 5│    ┌╨┐
-# 6│    ┘ └
-# 7┴──────
+import random
 
 
 def header():
@@ -55,34 +43,64 @@ def draw_hangman(tl):
     print("┴".ljust(7, "─"))
 
 
-def char_list(main, used, rest):
-    if rest is not None:
-        rest = []
-    for char in main:
-        if char in used:
-            char_replace = char.replace(char, "_")
-            rest.append(char_replace)
+def play(no):
+    alphabet = list(string.ascii_uppercase)
+    numbers = list(string.digits)
+    main_alphabet = alphabet + numbers
+    rest_alphabet = main_alphabet.copy()
+
+    if no == 1:
+        f = open("words.txt", "r")
+        words = f.read().splitlines()
+        secret_phrase = list(random.choice(words).upper())
+    else:
+        secret_phrase = list(input("secret phrase: ").upper())
+
+    temp_phrase = secret_phrase.copy()
+
+    os.system("cls" if os.name == "nt" else "clear")
+
+    for i, w in enumerate(secret_phrase):
+        if w in main_alphabet:
+            temp_phrase[i] = "_"
+
+    attempts = 6  # NOTE - tries left
+
+    while attempts > 0:
+        os.system("cls" if os.name == "nt" else "clear")
+        header()
+        draw_hangman(attempts)
+        print("".join(rest_alphabet))
+        print("".join(temp_phrase))
+
+        letter = input("your input: ").upper()
+
+        for i, w in enumerate(main_alphabet):
+            if w in letter:
+                rest_alphabet[i] = "_"
+
+        for i, w in enumerate(secret_phrase):
+            if w == letter:
+                temp_phrase[i] = secret_phrase[i]
+
+        if letter in secret_phrase:
+            pass
         else:
-            rest.append(char)
-    return rest
+            attempts -= 1
+
+        if secret_phrase == temp_phrase:
+            print()
+            print(f'you did it!! "{"".join(temp_phrase)}" is correct phrase')
+            print()
+            break
+        else:
+            print()
+            print(f'you lost!! "{"".join(secret_phrase)}" is correct phrase')
+            print()
 
 
-# os.system("cls" if os.name == "nt" else "clean")
-
-main_alphabet = list(string.ascii_uppercase)
-used_alphabet = []
-rest_alphabet = []
-attempts = 6  # NOTE - tries left
-
-secret_word = input("unesi: ")
-
-
-while attempts > 0:
-    header()
-    for char in char_list(main_alphabet, used_alphabet, rest_alphabet):
-        print(char, end=" ")
-    print()
-    draw_hangman(attempts)
-    letter = input("unesi slovo: ")
-    used_alphabet.append(letter.upper())
-    attempts -= 1
+if __name__ == '__main__':
+    print("1: for one player vs. computer mode")
+    print("2: for two players mode")
+    players = int(input("Enter: "))
+    play(players)
