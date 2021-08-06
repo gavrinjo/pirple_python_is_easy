@@ -16,11 +16,8 @@ The re-released single in 1986 contains the B-side(s): B1. "She's Got Balls" (Li
 In January 2018, as part of Triple M's "Ozzest 100", the 'most Australian' songs of all time, "You Shook Me All Night Long" was ranked number 63
 """
 
-
-
-#!here is dictionary with for loop.
-#!Initially i was too lazy to type print for every variable :)
-
+# !here is dictionary with for loop.
+# !Initially i was too lazy to type print for every variable :)
 
 dictionary = {
     "song":"You Shook Me All Night Long",
@@ -38,7 +35,8 @@ dictionary = {
 for key, value in dictionary.items():
     print(f"{key} = {value}")
 
-def gues_attrib(key, value):
+
+def guess_attrib(key, value):
     if key in dictionary:
         if value.isnumeric():
             value = int(value)
@@ -50,7 +48,10 @@ def gues_attrib(key, value):
     else:
         print("wrong answer!!")
 
-a = input("write a key\n")
-b = input("write key value\n").lower()
 
-gues_attrib(a, b)
+if __name__ == '__main__':
+
+    a = input("write a key\n")
+    b = input("write key value\n").lower()
+
+    guess_attrib(a, b)
